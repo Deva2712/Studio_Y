@@ -58,36 +58,24 @@ document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
 
-// Add touch swipe functionality for project gallery
-let touchStartX = 0;
-let touchEndX = 0;
+// Add touch swipe functionality for each project images slider
+document.querySelectorAll('.project-images-slider').forEach(slider => {
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-if (gallerySlider) {
-    gallerySlider.addEventListener('touchstart', (e) => {
+    slider.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
     });
 
-    gallerySlider.addEventListener('touchend', (e) => {
+    slider.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    });
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
         const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-            const scrollAmount = gallerySlider.offsetWidth * 0.9;
-            if (diff > 0) {
-                // Swipe left
-                gallerySlider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            } else {
-                // Swipe right
-                gallerySlider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            }
+        if (Math.abs(diff) > 50) {
+            const scrollAmount = slider.offsetWidth * 0.9;
+            slider.scrollBy({ left: diff > 0 ? scrollAmount : -scrollAmount, behavior: 'smooth' });
         }
-    }
-}
+    });
+});
 
 // Parallax effect for hero section and smooth background reveal
 window.addEventListener('scroll', () => {
