@@ -59,6 +59,13 @@ p {
     z-index: 10;
 }
 
+.header-hero-wrapper {
+    background-image: url('Desktop-version-hero-image/fifth.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .logo-placeholder {
     display: flex;
     align-items: center;
@@ -81,16 +88,22 @@ p {
 .hero-image-placeholder {
     width: 100%;
     height: 70vh;
-    background-color: rgb(238, 231, 223);
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
 
+.hero-text {
+    position: sticky;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .hero-text h1 {
     text-align: center;
-    color: #2a2a2a;
+    color: #f5f5f5;
     font-size: 2.2rem;
     letter-spacing: 1px;
 }
@@ -122,6 +135,7 @@ p {
     text-align: center;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     position: relative;
+    z-index: 100;
 }
 
 .about-overlay h2 {
@@ -136,8 +150,8 @@ p {
 .about-overlay p {
     font-family: 'Figtree', sans-serif;
     font-weight: 300;
-    font-size: 24px;
-    line-height: 100%;
+    font-size: 1.2rem !important;
+    line-height: 1.6 !important;
     letter-spacing: 0;
     text-align: center;
     color: #4a4a4a;
@@ -179,7 +193,7 @@ p {
 .year-display {
     display: flex;
     gap: 2rem;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .year {
@@ -193,7 +207,7 @@ p {
 
 .year-description h4 {
     font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     color: #847f80;
     font-family: 'Figtree', sans-serif;
     font-style: italic;
@@ -208,7 +222,7 @@ p {
 }
 
 .elaborated {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     font-size: 1.2rem !important;
     line-height: 1.6;
     font-family: 'Figtree', sans-serif;
@@ -238,6 +252,10 @@ p {
 @media (min-width: 768px) {
     .stat-item-reverse {
         flex-direction: row-reverse;
+    }
+    
+    .stat-item-reverse .stat-content {
+        padding-left: 360px;
     }
 }
 
@@ -450,15 +468,107 @@ p {
 
 .project-image {
     min-width: 85%;
-    height: 400px;
+    height: 600px;
     background-color: rgb(238, 231, 223);
     border-radius: 19px 0 0 0;
     scroll-snap-align: center;
     transition: opacity 0.4s ease;
     flex-shrink: 0;
-    background-size: cover;
-    background-position: center;
+    background-size: 110%;
+    background-position: center bottom;
     background-repeat: no-repeat;
+}
+
+.nivara-image {
+    background-size: 110%;
+    height: 600px;
+    background-position: center bottom;
+}
+
+.team-pixel-first {
+    background-position: center 45% !important;
+}
+
+.team-pixel-second {
+    background-position: center 60% !important;
+    background-size: 99.9% !important;
+}
+
+.team-pixel-third {
+    background-image: url('Team Pixel\'s Head Quarter/third only for desktop.webp') !important;
+    background-position: center 95% !important;
+    background-size: cover !important;
+}
+
+.team-pixel-fourth {
+    background-position: center 50% !important;
+    background-size: cover !important;
+}
+
+.team-pixel-fifth {
+    background-position: center 40% !important;
+    background-size: cover !important;
+}
+
+.team-pixel-sixth {
+    background-position: center 19% !important;
+    background-size: cover !important;
+}
+
+.pavilion-third {
+    background-position: center 30% !important;
+}
+
+.pavilion-fifth {
+    background-position: left 30% !important;
+}
+
+.pavilion-sixth {
+    background-position: center 30% !important;
+}
+
+@media (max-width: 767px) {
+    .team-pixel-first {
+        background-position: center !important;
+    }
+    
+    .team-pixel-second {
+        background-position: center !important;
+        background-size: 110% !important;
+    }
+    
+    .team-pixel-third {
+        background-image: url('Team Pixel\'s Head Quarter/third.webp') !important;
+        background-position: center !important;
+        background-size: 110% !important;
+    }
+    
+    .team-pixel-fourth {
+        background-position: center !important;
+        background-size: 110% !important;
+    }
+    
+    .team-pixel-fifth {
+        background-position: center !important;
+        background-size: 110% !important;
+    }
+    
+    .team-pixel-sixth {
+        background-position: center !important;
+        background-size: 110% !important;
+    }
+    
+    .pavilion-third {
+        background-position: center !important;
+    }
+    
+    .pavilion-fifth {
+        background-position: center !important;
+    }
+    
+    .pavilion-sixth {
+        background-position: center !important;
+    }
 }
 
 .gallery-image {
@@ -508,8 +618,8 @@ p {
     font-family: 'Figtree';
     font-weight: 300;
     font-style: normal;
-    font-size: 18px;
-    line-height: 100%;
+    font-size: 1.2rem;
+    line-height: 140%;
     letter-spacing: 0px;
     text-align: center;
     padding-left: 9rem;
@@ -519,7 +629,7 @@ p {
 
 .gallery-item:last-child .project-info .description {
     padding-bottom: 8rem;
-    border-bottom: 5px solid #E2E2E2;
+    border-bottom: none;
     margin-bottom: 2rem;
 }
 
@@ -606,28 +716,24 @@ p {
     font-family: 'Figtree', sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: 36px;
-    line-height: 100%;
+    font-size: 24px;
+    line-height: 140%;
     letter-spacing: 0px;
     text-align: right;
     margin-bottom: 1rem;
+    padding-left: 8.5rem;
 }
 
 .founder-name {
     font-family: 'Figtree', sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: 36px;
+    font-size: 24px;
     line-height: 100%;
     letter-spacing: 0px;
     text-align: right;
     font-style: italic;
     margin: 2rem 0;
-}
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
 }
 
 .image-label {
@@ -732,7 +838,7 @@ p {
 .testimonial-text {
     font-family: 'Figtree', sans-serif;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 24px;
     line-height: 121%;
     letter-spacing: 0px;
     margin-bottom: 0.5rem;
@@ -742,7 +848,7 @@ p {
 .testimonial-subtext {
     font-family: 'Figtree', sans-serif;
     font-weight: 300;
-    font-size: 36px;
+    font-size: 24px;
     line-height: 121%;
     letter-spacing: 0px;
     color: #888;
@@ -785,7 +891,7 @@ p {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    transform: scale(1.5);
+    transform: scale(1.2);
 }
 
 .inspiration-white-space {
@@ -823,14 +929,17 @@ p {
     width: 960px;
     height: 476px;
     align-items: flex-end;
+    justify-content: flex-end;
     text-align: right;
+    padding-left: 60rem;
+    padding-top: 30rem;
 }
 
 .inspiration-label {
     font-family: 'Figtree', sans-serif;
     font-size: 64px;
     font-weight: 700;
-    color: #666666;
+    color: #fbe29d;
     margin-bottom: 0;
     line-height: 98%;
     letter-spacing: 0;
@@ -840,7 +949,7 @@ p {
     font-family: 'Figtree', sans-serif;
     font-size: 96px;
     font-weight: 800;
-    color: #666666;
+    color: #fbe29d;
     margin-bottom: 0;
     line-height: 98%;
     letter-spacing: 0;
@@ -850,22 +959,24 @@ p {
     font-family: 'Figtree', sans-serif;
     font-size: 64px;
     font-weight: 700;
-    color: #666666;
+    color: #fbe29d;
     margin-bottom: 0;
     line-height: 98%;
     letter-spacing: 0;
     text-align: right;
+    white-space: nowrap;
 }
 
 .inspiration-subtitle {
     font-family: 'Figtree', sans-serif;
-    font-size: 128px;
+    font-size: 96px;
     font-weight: 800;
-    color: #666666;
+    color: #fbe29d;
     margin-bottom: 0;
     line-height: 98%;
     letter-spacing: 0;
     text-align: right;
+    white-space: nowrap;
 }
 
 /* Process Section */
@@ -914,7 +1025,7 @@ p {
     font-size: 96px;
     line-height: 100%;
     letter-spacing: 0;
-    color: #837F80;
+    color: #000000;
     margin-bottom: 1rem;
 }
 
@@ -932,17 +1043,17 @@ p {
 .process-step h3 {
     font-family: 'Figtree', sans-serif;
     font-weight: 600;
-    font-size: 64px;
+    font-size: 48px;
     line-height: 100%;
     letter-spacing: 0;
     margin-bottom: 0.5rem;
-    color: #837F80;
+    color: #000000;
 }
 
 .process-step p {
     font-family: 'Figtree', sans-serif;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 24px;
     line-height: 100%;
     letter-spacing: 0;
     color: #837F80;
@@ -951,7 +1062,6 @@ p {
 /* Beyond Borders Section */
 .beyond-borders {
     padding: 3rem 1.5rem;
-    border-top: 5px solid #E2E2E2;
     margin-top: 3rem;
 }
 
@@ -973,37 +1083,22 @@ p {
     text-align: center;
 }
 
-.map-placeholder {
-    width: 100%;
-    height: 400px;
-    background-color: rgb(238, 231, 223);
-    border-radius: 10px;
-    position: relative;
-}
-
-.location-marker {
-    position: absolute;
-    background-color: rgba(255, 200, 150, 0.8);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: bold;
-}
-
 /* Footer */
 .footer {
     background-color: #DCD9D9;
-    padding: 4rem 4rem 2rem 4rem;
+    padding: 0;
     position: relative;
     min-height: 600px;
+    margin: 0;
 }
 
 .footer-container {
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
     position: relative;
     height: 100%;
-    min-height: 550px;
+    min-height: 600px;
+    padding: 4rem 4rem 2rem 4rem;
 }
 
 /* Footer Image */
@@ -1011,6 +1106,8 @@ p {
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -1031,7 +1128,7 @@ p {
 .nav-link {
     font-family: 'DM Serif Display', serif;
     font-weight: 400;
-    font-size: 80px;
+    font-size: 60px;
     line-height: 1;
     color: #3A3A3A;
     text-decoration: none;
@@ -1064,7 +1161,8 @@ p {
 .footer-contact-info {
     position: absolute;
     bottom: 80px;
-    left: 0;
+    left: 4rem;
+    padding-bottom: 2rem;
 }
 
 .contact-phone,
@@ -1074,7 +1172,11 @@ p {
     font-size: 28px;
     line-height: 1.3;
     color: #4A4A4A;
-    margin: 0 0 4px 0;
+    margin: 0 0 0px 0;
+}
+
+.contact-email {
+    margin-bottom: 20px;
 }
 
 .contact-address {
@@ -1090,19 +1192,18 @@ p {
 .footer-copyright {
     position: absolute;
     bottom: 20px;
-    left: 0;
+    left: 4rem;
+    padding-bottom: 1rem;
     font-family: 'Figtree', sans-serif;
     font-weight: 300;
     font-size: 13px;
-    color: #9A9A9A;
+    color: #000000;
     display: flex;
     gap: 1rem;
 }
 
 .footer-copyright span {
     margin: 0;
-}
-    text-decoration: none;
 }
 
 /* Responsive adjustments */
@@ -1133,26 +1234,137 @@ p {
 
 /* Mobile Responsive Optimizations */
 @media (max-width: 767px) {
-    /* Typography adjustments for mobile */
+    /* Header and Logo mobile */
+    .header {
+        padding: 1rem 0;
+    }
+    
+    .header-hero-wrapper {
+        background-image: url('Mobile-version-hero-image/sixth 2.webp') !important;
+        min-height: 100vh;
+        background-size: cover;
+        background-position: top center;
+    }
+    
+    .logo-placeholder {
+        margin-top: 0;
+        padding-top: 1rem;
+    }
+    
+    .logo-image {
+        height: 180px;
+    }
+    
+    /* Hero section mobile */
+    .hero {
+        margin-bottom: 1rem;
+    }
+    
+    .hero-image-placeholder {
+        height: auto;
+        min-height: 40vh;
+        padding: 2rem 0;
+    }
+    
+    .hero-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    /* About section mobile */
+    .about-us {
+        padding: 0 1rem;
+        margin-top: -40px;
+    }
+    
+    .about-overlay {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+    
+    .about-overlay h2 {
+        font-size: 1.8rem;
+    }
+    
+    .about-overlay p {
+        font-size: 1rem;
+        line-height: 140%;
+    }
+    
+    /* Extended white background mobile */
+    .extended-white-background {
+        margin-top: -60px;
+        padding-top: 80px;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    /* Establishment section mobile */
+    .establishment {
+        padding: 2rem 1.5rem;
+    }
+    
+    .year-display {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
     .year {
         font-size: 4rem;
     }
     
     .year-description h4 {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
     .year-description p {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
     
     .elaborated {
-        font-size: 0.9rem !important;
+        font-size: 1rem !important;
+        line-height: 140% !important;
+    }
+    
+    /* Horizontal slider mobile */
+    .horizontal-slider {
+        margin: 2rem 0;
+    }
+    
+    .slider-image {
+        min-width: 250px;
+        height: 350px;
+        border-radius: 20px 0 0 0;
     }
     
     /* Stats section mobile */
+    .stats {
+        padding: 3rem 1.5rem;
+    }
+    
+    .stat-item {
+        flex-direction: row !important;
+        gap: 1rem;
+        padding: 1.5rem 0;
+    }
+    
+    .stat-item-reverse {
+        flex-direction: row !important;
+    }
+    
+    .stat-content {
+        order: 1;
+        flex: 1;
+    }
+    
+    .stat-images {
+        order: 2;
+        width: 140px;
+        margin-left: 0;
+    }
+    
     .stat-number {
-        font-size: 6rem;
+        font-size: 4rem;
+        line-height: 1;
+        margin-bottom: 0.5rem;
     }
     
     .stat-label {
@@ -1170,77 +1382,135 @@ p {
         min-height: 60px;
     }
     
-    .stat-images {
-        width: 140px;
-    }
-    
     .stat-images .circular-image:nth-child(2),
     .stat-images .circular-image:nth-child(3) {
         margin-left: -20px;
     }
     
-    /* Horizontal slider mobile */
-    .slider-image {
-        min-width: 250px;
-        height: 350px;
-    }
-    
     /* Projects gallery mobile */
+    .projects-gallery {
+        padding: 2rem 1rem;
+    }
+    
+    .projects-gallery h2 {
+        margin-bottom: 2rem;
+    }
+    
     .projects-gallery h2 .glimpse-text {
-        font-size: 34px;
-    }
-    
-    .projects-gallery h2 .our-projects-text {
-        font-size: 46px;
-    }
-    
-    .project-info h3 {
         font-size: 32px;
     }
     
+    .projects-gallery h2 .our-projects-text {
+        font-size: 48px;
+    }
+    
+    .gallery-track {
+        gap: 3rem;
+    }
+    
+    .project-images-slider {
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .project-image {
+        min-width: 90%;
+        height: 400px;
+        border-radius: 15px 0 0 0;
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .nivara-image {
+        background-size: cover !important;
+        height: 400px !important;
+        background-position: center !important;
+    }
+    
+    /* Mobile-specific Nivara images */
+    .nivara-img-1 {
+        background-image: url('Nivara-Mobile/first.webp') !important;
+    }
+    
+    .nivara-img-2 {
+        background-image: url('Nivara-Mobile/second.webp') !important;
+    }
+    
+    .nivara-img-3 {
+        background-image: url('Nivara-Mobile/third.webp') !important;
+    }
+    
+    .nivara-img-4 {
+        background-image: url('Nivara-Mobile/fourth.webp') !important;
+    }
+    
+    .nivara-img-5 {
+        background-image: url('Nivara-Mobile/fifth.webp') !important;
+    }
+    
+    .project-info h3 {
+        font-size: 36px;
+    }
+    
     .project-info .location {
-        font-size: 40px !important;
+        font-size: 18px !important;
     }
     
     .project-info .duration {
-        font-size: 24px;
+        font-size: 14px;
     }
     
     .project-info .description {
         font-size: 14px;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        line-height: 140%;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
     
-    /* Founder section mobile - stack vertically */
+    .gallery-item:last-child .project-info .description {
+        padding-bottom: 3rem;
+    }
+    
+    /* Founder section mobile */
+    .founder {
+        padding: 3rem 1.5rem;
+    }
+    
     .founder-header {
         flex-direction: column;
         gap: 1rem;
+        margin-bottom: 1.5rem;
     }
     
     .founder-subtitle {
-        font-size: 18px;
-        padding-left: 0;
+        font-size: 20px;
+        text-align: left;
     }
     
     .founder-subtitle .subtitle-light {
-        font-size: 18px;
+        font-size: 20px;
     }
     
     .founder h2 {
         font-size: 48px;
         text-align: left;
         padding-right: 0;
+        line-height: 100%;
     }
     
     .founder-body {
         flex-direction: column;
+        gap: 1.5rem;
     }
     
     .founder-image-placeholder {
         width: 100%;
         height: 400px;
         min-width: 100%;
+        border-radius: 15px 0 0 0;
+        background-image: url('founder-image-only-for-mobile/IMG_2392 (2).webp') !important;
+        background-size: cover;
+        transform: scale(1);
     }
     
     .founder-content {
@@ -1249,11 +1519,16 @@ p {
     
     .founder-bio {
         text-align: left;
-        font-size: 0.85rem;
+        font-size: 16px;
+        line-height: 140%;
+        margin-bottom: 1rem;
+        padding-left: 0;
     }
     
     .founder-name {
         text-align: left;
+        font-size: 18px;
+        margin: 1.5rem 0;
     }
     
     /* Testimonials section mobile */
@@ -1282,14 +1557,15 @@ p {
     }
     
     .client-image-placeholder {
-        width: 80px;
-        height: 80px;
-        min-width: 80px;
+        width: 100px;
+        height: 100px;
+        min-width: 100px;
     }
     
     .quote-mark {
-        font-size: 100px;
-        right: 10px;
+        font-size: 80px;
+        right: 5px;
+        top: -10px;
     }
     
     .client-name {
@@ -1297,18 +1573,24 @@ p {
     }
     
     .client-occupation {
-        font-size: 18px;
+        font-size: 16px;
     }
     
     .testimonial-text {
-        font-size: 20px;
+        font-size: 18px;
+        line-height: 140%;
     }
     
     .testimonial-subtext {
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 140%;
     }
     
-    /* Inspiration section mobile - hide desktop grid, show mobile grid */
+    /* Inspiration section mobile */
+    .inspiration {
+        padding: 2rem 0;
+    }
+    
     .inspiration-grid-desktop {
         display: none;
     }
@@ -1317,8 +1599,8 @@ p {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 0;
-        padding: 0;
-        max-width: 592px;
+        padding: 0 1rem;
+        max-width: 100%;
         margin: 0 auto;
         position: relative;
     }
@@ -1326,7 +1608,7 @@ p {
     .inspiration-item-mobile {
         position: relative;
         width: 100%;
-        height: 446px;
+        height: 200px;
         overflow: hidden;
     }
     
@@ -1334,36 +1616,33 @@ p {
         width: 100%;
         height: 100%;
         background-color: rgb(210, 205, 200);
-        border-top-left-radius: 19px;
-        border-bottom-right-radius: 19px;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
     }
     
-    /* Mobile text overlays */
     .inspiration-text-overlay-mobile {
         position: absolute;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        padding: 1.5rem;
+        justify-content: center;
+        padding: 1rem;
         z-index: 10;
         pointer-events: none;
     }
     
-    /* Left text overlay - spans first two images (columns 1-2) */
     .inspiration-text-mobile-left {
         top: 0;
         left: 0;
         width: 66.66%;
-        height: 446px;
+        height: 200px;
         align-items: flex-start;
     }
     
-    /* Right text overlay - starts at image 3, wraps to second row spanning all 3 */
     .inspiration-text-mobile-right {
         top: 0;
         left: 66.66%;
         width: 133.33%;
-        height: 892px;
+        height: 400px;
         align-items: flex-end;
         text-align: right;
         padding-top: 50%;
@@ -1371,69 +1650,46 @@ p {
     
     .inspiration-label-mobile {
         font-family: 'Figtree', sans-serif;
-        font-size: 1.5rem;
+        font-size: 1rem;
         font-weight: 600;
         color: #666666;
-        margin-bottom: 0;
-        line-height: 98%;
-        letter-spacing: 0;
+        line-height: 110%;
     }
     
     .inspiration-title-mobile {
         font-family: 'Figtree', sans-serif;
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 800;
         color: #666666;
-        margin-bottom: 0;
-        line-height: 98%;
-        letter-spacing: 0;
+        line-height: 110%;
     }
     
     .inspiration-tagline-mobile {
         font-family: 'Figtree', sans-serif;
-        font-size: 1.5rem;
+        font-size: 1rem;
         font-weight: 600;
         color: #666666;
-        margin-bottom: 0;
-        line-height: 98%;
-        letter-spacing: 0;
+        line-height: 110%;
         text-align: right;
     }
     
     .inspiration-subtitle-mobile {
         font-family: 'Figtree', sans-serif;
-        font-size: 2.5rem;
+        font-size: 1.5rem;
         font-weight: 800;
         color: #666666;
-        margin-bottom: 0;
-        line-height: 98%;
-        letter-spacing: 0;
+        line-height: 110%;
         text-align: right;
     }
     
-    /* Process section mobile - fix image overflow */
+    /* Process section mobile */
     .process {
         padding: 3rem 1rem;
         overflow-x: hidden;
     }
     
-    .process-image {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        min-height: 200px;
-    }
-    
-    .process-step h4 {
-        font-size: 48px;
-    }
-    
-    .process-step h3 {
-        font-size: 32px;
-    }
-    
-    .process-step p {
-        font-size: 14px;
+    .process h2 {
+        margin-bottom: 2rem;
     }
     
     .process-heading-small {
@@ -1444,46 +1700,95 @@ p {
         font-size: 48px;
     }
     
-    /* Stats mobile - ensure normal order for all items */
-    .stat-item,
-    .stat-item-reverse {
-        flex-direction: row !important;
+    .process-steps {
+        gap: 2rem;
     }
     
-    .stat-content {
-        order: 1;
+    .process-step h4 {
+        font-size: 48px;
+        margin-bottom: 0.5rem;
     }
     
-    .stat-images {
-        order: 2;
+    .process-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 150px;
+        aspect-ratio: 16/9;
+        border-top-left-radius: 15px;
+    }
+    
+    .process-step h3 {
+        font-size: 28px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .process-step p {
+        font-size: 14px;
+        line-height: 140%;
+    }
+    
+    /* Beyond Borders mobile */
+    .beyond-borders {
+        padding: 3rem 1.5rem;
+    }
+    
+    .beyond-borders h2 {
+        font-size: 48px;
     }
     
     /* Footer mobile */
     .footer {
-        padding: 2rem 1.5rem;
+        padding: 3rem 1.5rem 1.5rem 1.5rem;
         min-height: auto;
     }
     
     .footer-container {
         min-height: auto;
+        height: auto;
     }
     
     .footer-image {
-        width: 200px;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .footer-nav-staggered {
         height: 200px;
+        margin-bottom: 3rem;
     }
     
     .nav-link {
-        font-size: 40px;
+        font-size: 32px;
+    }
+    
+    .nav-home {
+        top: 0;
+        left: 0;
     }
     
     .nav-about {
-        top: 80px;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .nav-projects {
+        top: 0;
+        right: 0;
+    }
+    
+    .footer-contact-info {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-bottom: 2rem;
     }
     
     .contact-phone,
     .contact-email {
-        font-size: 18px;
+        font-size: 16px;
     }
     
     .contact-address {
@@ -1491,6 +1796,9 @@ p {
     }
     
     .footer-copyright {
+        position: relative;
+        bottom: auto;
+        left: auto;
         font-size: 10px;
         flex-direction: column;
         gap: 0.3rem;

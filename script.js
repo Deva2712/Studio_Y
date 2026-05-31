@@ -50,13 +50,20 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Apply fade-in animation to sections
-document.querySelectorAll('section').forEach(section => {
+// Apply fade-in animation to sections (except header and hero)
+document.querySelectorAll('section:not(.hero)').forEach(section => {
     section.style.opacity = '0';
     section.style.transform = 'translateY(20px)';
     section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(section);
 });
+
+// Make hero section visible immediately
+const heroSection = document.querySelector('.hero');
+if (heroSection) {
+    heroSection.style.opacity = '1';
+    heroSection.style.transform = 'translateY(0)';
+}
 
 // Add touch swipe functionality for each project images slider
 document.querySelectorAll('.project-images-slider').forEach(slider => {
@@ -81,11 +88,22 @@ document.querySelectorAll('.project-images-slider').forEach(slider => {
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const hero = document.querySelector('.hero-image-placeholder');
+    const heroText = document.querySelector('.hero-text');
     const extendedBg = document.querySelector('.extended-white-background');
     const aboutOverlay = document.querySelector('.about-overlay');
     
     if (hero) {
         hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+    
+    // Hide hero text when scrolling past hero section (desktop only)
+    if (heroText && window.innerWidth >= 768) {
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            const scrollProgress = Math.min(1, scrolled / (heroBottom * 0.5));
+            heroText.style.opacity = 1 - scrollProgress;
+        }
     }
     
     // Smooth reveal animation for extended background
