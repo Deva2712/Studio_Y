@@ -1531,9 +1531,13 @@ p {
         bottom: auto;
         top: 50%;
         transform: translateY(50px);
-        right: 15px;
+        right: 60px;
         z-index: 100;
         display: flex !important;
+    }
+    
+    .video-mute-btn:hover {
+        transform: translateY(50px);
     }
     
     .project-image {
