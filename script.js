@@ -148,3 +148,63 @@ if ('IntersectionObserver' in window) {
 }
 
 console.log('Studio Y - Mobile Landing Page Loaded ✨');
+
+
+// Navigation arrows for project sliders (mobile)
+document.querySelectorAll('.project-images-slider').forEach(slider => {
+    const leftArrow = slider.querySelector('.slider-arrow-left');
+    const rightArrow = slider.querySelector('.slider-arrow-right');
+    const track = slider.querySelector('.project-images-track');
+    
+    if (leftArrow && rightArrow && track) {
+        leftArrow.addEventListener('click', () => {
+            const scrollAmount = slider.offsetWidth * 0.9;
+            slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+        
+        rightArrow.addEventListener('click', () => {
+            const scrollAmount = slider.offsetWidth * 0.9;
+            slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    }
+});
+
+// Video mute/unmute functionality with auto-mute other videos
+const allVideos = ['nivara-video', 'team-pixel-video', 'katni-video'];
+
+document.querySelectorAll('.video-mute-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const videoId = btn.getAttribute('data-video');
+        const video = document.getElementById(videoId);
+        const muteIcon = btn.querySelector('.mute-icon');
+        const unmuteIcon = btn.querySelector('.unmute-icon');
+        
+        if (video) {
+            if (video.muted) {
+                // Unmute this video
+                video.muted = false;
+                muteIcon.style.display = 'none';
+                unmuteIcon.style.display = 'block';
+                
+                // Mute all other videos
+                allVideos.forEach(otherId => {
+                    if (otherId !== videoId) {
+                        const otherVideo = document.getElementById(otherId);
+                        const otherBtn = document.querySelector(`[data-video="${otherId}"]`);
+                        if (otherVideo && otherBtn) {
+                            otherVideo.muted = true;
+                            otherBtn.querySelector('.mute-icon').style.display = 'block';
+                            otherBtn.querySelector('.unmute-icon').style.display = 'none';
+                        }
+                    }
+                });
+            } else {
+                // Mute this video
+                video.muted = true;
+                muteIcon.style.display = 'block';
+                unmuteIcon.style.display = 'none';
+            }
+        }
+    });
+});
