@@ -1531,7 +1531,7 @@ p {
         bottom: auto;
         top: 50%;
         transform: translateY(50px);
-        right: 60px;
+        right: 150px;
         z-index: 100;
         display: flex !important;
     }
