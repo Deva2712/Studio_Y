@@ -548,10 +548,6 @@ p {
     background: rgba(0, 0, 0, 0.8);
 }
 
-.slider-arrow-left {
-    left: 10px;
-}
-
 .slider-arrow-right {
     right: 10px;
 }

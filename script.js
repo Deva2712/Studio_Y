@@ -150,18 +150,11 @@ if ('IntersectionObserver' in window) {
 console.log('Studio Y - Mobile Landing Page Loaded ✨');
 
 
-// Navigation arrows for project sliders (mobile)
+// Navigation arrows for project sliders (mobile) - right arrow only
 document.querySelectorAll('.project-images-slider').forEach(slider => {
-    const leftArrow = slider.querySelector('.slider-arrow-left');
     const rightArrow = slider.querySelector('.slider-arrow-right');
-    const track = slider.querySelector('.project-images-track');
     
-    if (leftArrow && rightArrow && track) {
-        leftArrow.addEventListener('click', () => {
-            const scrollAmount = slider.offsetWidth * 0.9;
-            slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
-        
+    if (rightArrow) {
         rightArrow.addEventListener('click', () => {
             const scrollAmount = slider.offsetWidth * 0.9;
             slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
