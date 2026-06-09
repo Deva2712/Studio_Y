@@ -201,3 +201,7 @@ document.querySelectorAll('.video-mute-btn').forEach(btn => {
         }
     });
 });
+
+
+// Initialize Lucide icons
+lucide.createIcons();

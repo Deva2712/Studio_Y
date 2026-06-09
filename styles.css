@@ -524,6 +524,13 @@ p {
     transform: scale(1.1);
 }
 
+.video-mute-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+    stroke-width: 2;
+}
+
 /* Navigation Arrows for Mobile */
 .slider-arrow {
     position: absolute;
@@ -1538,6 +1545,11 @@ p {
     
     .video-mute-btn:hover {
         transform: translateY(50px);
+    }
+    
+    .video-mute-btn svg {
+        width: 20px;
+        height: 20px;
     }
     
     .project-image {
