@@ -1629,7 +1629,7 @@ p {
     }
     
     .project-images-slider {
-        padding: 0 1rem;
+        padding: 0;
         margin-bottom: 1rem;
     }
     
@@ -1670,7 +1670,8 @@ p {
     }
     
     .project-image {
-        min-width: 90%;
+        min-width: 100%;
+        width: 100%;
         height: 550px;
         border-radius: 15px 0 0 0;
         background-size: cover;
