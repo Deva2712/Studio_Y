@@ -205,3 +205,84 @@ document.querySelectorAll('.video-mute-btn').forEach(btn => {
 
 // Initialize Lucide icons
 lucide.createIcons();
+
+// Fullscreen video functionality (Mobile Only)
+if (window.innerWidth < 768) {
+    const fullscreenOverlay = document.getElementById('fullscreen-video-overlay');
+    const fullscreenVideo = document.getElementById('fullscreen-video');
+    const closeBtn = document.querySelector('.fullscreen-close-btn');
+    const playPauseBtn = document.querySelector('.fullscreen-play-pause-btn');
+    const muteBtnFS = document.querySelector('.fullscreen-mute-btn');
+    
+    // Play button click handlers
+    document.querySelectorAll('.video-play-btn').forEach(playBtn => {
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const videoContainer = playBtn.closest('.project-video');
+            const originalVideo = videoContainer.querySelector('video');
+            
+            // Set fullscreen video source
+            fullscreenVideo.src = originalVideo.querySelector('source').src;
+            fullscreenVideo.muted = originalVideo.muted;
+            
+            // Show overlay and play
+            fullscreenOverlay.style.display = 'flex';
+            fullscreenVideo.play();
+            
+            // Update play/pause button
+            document.querySelector('.pause-icon-fs').style.display = 'block';
+            document.querySelector('.play-icon-fs').style.display = 'none';
+            
+            // Update mute button
+            if (fullscreenVideo.muted) {
+                document.querySelector('.mute-icon-fs').style.display = 'block';
+                document.querySelector('.unmute-icon-fs').style.display = 'none';
+            } else {
+                document.querySelector('.mute-icon-fs').style.display = 'none';
+                document.querySelector('.unmute-icon-fs').style.display = 'block';
+            }
+            
+            // Recreate Lucide icons in overlay
+            lucide.createIcons();
+        });
+    });
+    
+    // Close button
+    closeBtn.addEventListener('click', () => {
+        fullscreenVideo.pause();
+        fullscreenVideo.currentTime = 0;
+        fullscreenOverlay.style.display = 'none';
+    });
+    
+    // Play/Pause button
+    playPauseBtn.addEventListener('click', () => {
+        const pauseIcon = document.querySelector('.pause-icon-fs');
+        const playIcon = document.querySelector('.play-icon-fs');
+        
+        if (fullscreenVideo.paused) {
+            fullscreenVideo.play();
+            pauseIcon.style.display = 'block';
+            playIcon.style.display = 'none';
+        } else {
+            fullscreenVideo.pause();
+            pauseIcon.style.display = 'none';
+            playIcon.style.display = 'block';
+        }
+    });
+    
+    // Mute button
+    muteBtnFS.addEventListener('click', () => {
+        const muteIcon = document.querySelector('.mute-icon-fs');
+        const unmuteIcon = document.querySelector('.unmute-icon-fs');
+        
+        if (fullscreenVideo.muted) {
+            fullscreenVideo.muted = false;
+            muteIcon.style.display = 'none';
+            unmuteIcon.style.display = 'block';
+        } else {
+            fullscreenVideo.muted = true;
+            muteIcon.style.display = 'block';
+            unmuteIcon.style.display = 'none';
+        }
+    });
+}

@@ -531,6 +531,119 @@ p {
     stroke-width: 2;
 }
 
+/* Video Play Button (Mobile Only) */
+.video-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    color: white;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 15;
+}
+
+.video-play-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-play-btn svg {
+    width: 32px;
+    height: 32px;
+    stroke: white;
+    stroke-width: 2;
+    margin-left: 4px;
+}
+
+/* Fullscreen Video Overlay (Mobile Only) */
+.fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullscreen-overlay video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.fullscreen-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 10000;
+}
+
+.fullscreen-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+}
+
+.fullscreen-close-btn svg {
+    width: 28px;
+    height: 28px;
+    stroke: white;
+    stroke-width: 2;
+}
+
+.fullscreen-play-pause-btn,
+.fullscreen-mute-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullscreen-play-pause-btn svg,
+.fullscreen-mute-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+    stroke-width: 2;
+}
+
+.mobile-only-play {
+    display: none;
+}
+
 /* Navigation Arrows for Mobile */
 .slider-arrow {
     position: absolute;
@@ -1520,8 +1633,12 @@ p {
         margin-bottom: 1rem;
     }
     
-    /* Show arrows on mobile */
+    /* Show arrows and play button on mobile */
     .mobile-only {
+        display: flex !important;
+    }
+    
+    .mobile-only-play {
         display: flex !important;
     }
     
@@ -1554,7 +1671,7 @@ p {
     
     .project-image {
         min-width: 90%;
-        height: 400px;
+        height: 550px;
         border-radius: 15px 0 0 0;
         background-size: cover;
         background-position: center;
@@ -1578,7 +1695,7 @@ p {
     
     .nivara-image {
         background-size: cover !important;
-        height: 400px !important;
+        height: 550px !important;
         background-position: center !important;
     }
     
