@@ -1618,6 +1618,19 @@ p {
         border-radius: 15px 0 0 0;
     }
     
+    .project-video video::-webkit-media-controls {
+        display: none !important;
+    }
+    
+    .project-video video::-webkit-media-controls-enclosure {
+        display: none !important;
+    }
+    
+    /* Hide mute button on mobile */
+    .video-mute-btn {
+        display: none !important;
+    }
+    
     .nivara-image {
         background-size: cover !important;
         height: 550px !important;
