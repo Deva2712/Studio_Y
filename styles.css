@@ -1563,11 +1563,12 @@ p {
         scroll-padding: 0;
         overflow-x: scroll;
         scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
     }
     
     .project-images-track {
-        gap: 1rem;
-        padding: 0 1rem;
+        gap: 0;
+        padding: 0;
     }
     
     /* Show arrows and play button on mobile */
@@ -1609,27 +1610,29 @@ p {
     }
     
     .project-image {
-        min-width: calc(100vw - 2rem);
-        width: calc(100vw - 2rem);
+        min-width: 100vw;
+        width: 100vw;
         flex-shrink: 0;
         aspect-ratio: 4 / 5;
         height: auto;
         border-radius: 15px 0 0 0;
         background-size: cover;
         background-position: center;
-        scroll-snap-align: center;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
     }
     
     .project-video {
-        min-width: calc(100vw - 2rem);
-        width: calc(100vw - 2rem);
+        min-width: 100vw;
+        width: 100vw;
         flex-shrink: 0;
         aspect-ratio: 4 / 5;
         height: auto;
         border-radius: 15px 0 0 0;
         position: relative;
         overflow: visible;
-        scroll-snap-align: center;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
     }
     
     .project-video video {
