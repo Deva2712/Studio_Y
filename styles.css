@@ -1558,13 +1558,16 @@ p {
     }
     
     .project-images-slider {
-        padding: 0 1rem;
+        padding: 0;
         margin-bottom: 1rem;
-        scroll-padding: 1rem;
+        scroll-padding: 0;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
     }
     
     .project-images-track {
         gap: 1rem;
+        padding: 0 1rem;
     }
     
     /* Show arrows and play button on mobile */
@@ -1606,8 +1609,9 @@ p {
     }
     
     .project-image {
-        min-width: calc(100% - 2rem);
-        width: calc(100% - 2rem);
+        min-width: calc(100vw - 2rem);
+        width: calc(100vw - 2rem);
+        flex-shrink: 0;
         aspect-ratio: 4 / 5;
         height: auto;
         border-radius: 15px 0 0 0;
@@ -1617,8 +1621,9 @@ p {
     }
     
     .project-video {
-        min-width: calc(100% - 2rem);
-        width: calc(100% - 2rem);
+        min-width: calc(100vw - 2rem);
+        width: calc(100vw - 2rem);
+        flex-shrink: 0;
         aspect-ratio: 4 / 5;
         height: auto;
         border-radius: 15px 0 0 0;
