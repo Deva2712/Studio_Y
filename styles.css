@@ -1473,6 +1473,10 @@ p {
         margin: 2rem 0;
     }
     
+    .slider-track {
+        animation: scroll 12s linear infinite;
+    }
+    
     .slider-image {
         min-width: 250px;
         height: 350px;
