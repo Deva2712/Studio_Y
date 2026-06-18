@@ -1598,7 +1598,7 @@ p {
     .project-image {
         min-width: 100%;
         width: 100%;
-        aspect-ratio: 9 / 16;
+        aspect-ratio: 4 / 5;
         height: auto;
         border-radius: 15px 0 0 0;
         background-size: cover;
@@ -1636,7 +1636,7 @@ p {
     
     .nivara-image {
         background-size: cover !important;
-        aspect-ratio: 9 / 16 !important;
+        aspect-ratio: 4 / 5 !important;
         height: auto !important;
         background-position: center !important;
     }
