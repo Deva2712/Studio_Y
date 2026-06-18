@@ -1441,7 +1441,7 @@ p {
     .year-display {
         flex-direction: row;
         gap: 1.5rem;
-        align-items: flex-start;
+        align-items: center;
     }
     
     .year {
@@ -1475,7 +1475,7 @@ p {
     
     .slider-track {
         gap: 1rem;
-        animation: scrollMobile 20s linear infinite;
+        animation: scrollMobile 24s linear infinite;
     }
     
     .slider-image {
@@ -1558,8 +1558,13 @@ p {
     }
     
     .project-images-slider {
-        padding: 0;
+        padding: 0 50%;
         margin-bottom: 1rem;
+        scroll-padding: 0 50%;
+    }
+    
+    .project-images-track {
+        gap: 2rem;
     }
     
     /* Show arrows and play button on mobile */
