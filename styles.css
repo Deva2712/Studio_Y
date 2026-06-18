@@ -1558,14 +1558,13 @@ p {
     }
     
     .project-images-slider {
-        padding: 0;
+        padding: 0 1rem;
         margin-bottom: 1rem;
-        scroll-padding: 0;
+        scroll-padding: 1rem;
     }
     
     .project-images-track {
-        gap: 0;
-        padding: 0;
+        gap: 1rem;
     }
     
     /* Show arrows and play button on mobile */
@@ -1607,22 +1606,25 @@ p {
     }
     
     .project-image {
-        min-width: 100%;
-        width: 100%;
+        min-width: calc(100% - 2rem);
+        width: calc(100% - 2rem);
         aspect-ratio: 4 / 5;
         height: auto;
         border-radius: 15px 0 0 0;
         background-size: cover;
         background-position: center;
+        scroll-snap-align: center;
     }
     
     .project-video {
-        min-width: 100%;
-        width: 100%;
-        height: 400px;
+        min-width: calc(100% - 2rem);
+        width: calc(100% - 2rem);
+        aspect-ratio: 4 / 5;
+        height: auto;
         border-radius: 15px 0 0 0;
         position: relative;
         overflow: visible;
+        scroll-snap-align: center;
     }
     
     .project-video video {
