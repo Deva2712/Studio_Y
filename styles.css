@@ -1475,7 +1475,7 @@ p {
     
     .slider-track {
         gap: 1rem;
-        animation: scroll 2s linear infinite;
+        animation: scrollMobile 20s linear infinite;
     }
     
     .slider-image {
@@ -2198,5 +2198,14 @@ p {
         font-size: 10px;
         flex-direction: column;
         gap: 0.3rem;
+    }
+    
+    @keyframes scrollMobile {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-250px * 8 - 1rem * 8));
+        }
     }
 }
