@@ -1474,7 +1474,8 @@ p {
     }
     
     .slider-track {
-        animation: scroll 12s linear infinite;
+        gap: 1rem;
+        animation: scroll 15s linear infinite;
     }
     
     .slider-image {
