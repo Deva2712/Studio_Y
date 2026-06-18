@@ -1,3 +1,28 @@
+// Initialize Swiper for project image sliders (mobile only)
+if (window.innerWidth <= 768) {
+    const swipers = document.querySelectorAll('.project-images-slider.swiper');
+    swipers.forEach((swiperEl) => {
+        new Swiper(swiperEl, {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: false,
+            resistanceRatio: 0,
+            touchReleaseOnEdges: false,
+            navigation: {
+                nextEl: swiperEl.querySelector('.swiper-button-next'),
+            },
+            on: {
+                reachEnd: function () {
+                    this.allowSlideNext = false;
+                },
+                fromEdge: function () {
+                    this.allowSlideNext = true;
+                }
+            }
+        });
+    });
+}
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

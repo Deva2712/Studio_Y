@@ -1560,15 +1560,29 @@ p {
     .project-images-slider {
         padding: 0;
         margin-bottom: 1rem;
-        scroll-padding: 0;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
+        overflow: hidden;
+    }
+    
+    .project-images-slider.swiper {
+        width: 100%;
+        height: auto;
     }
     
     .project-images-track {
         gap: 0;
         padding: 0;
+    }
+    
+    .swiper-slide {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .swiper-button-next {
+        color: #000;
     }
     
     /* Show arrows and play button on mobile */
@@ -1610,29 +1624,25 @@ p {
     }
     
     .project-image {
-        min-width: 100vw;
-        width: 100vw;
+        min-width: 100%;
+        width: 100%;
         flex-shrink: 0;
         aspect-ratio: 4 / 5;
         height: auto;
         border-radius: 15px 0 0 0;
         background-size: cover;
         background-position: center;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
     }
     
     .project-video {
-        min-width: 100vw;
-        width: 100vw;
+        min-width: 100%;
+        width: 100%;
         flex-shrink: 0;
         aspect-ratio: 4 / 5;
         height: auto;
         border-radius: 15px 0 0 0;
         position: relative;
         overflow: visible;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
     }
     
     .project-video video {
