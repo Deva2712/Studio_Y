@@ -1,47 +1,83 @@
 // Simple Navigation Button Logic for Project Image Sliders (Mobile Only)
-document.querySelectorAll('.project-images-slider').forEach(slider => {
-    const leftArrow = slider.querySelector('.slider-arrow-left');
-    const rightArrow = slider.querySelector('.slider-arrow-right');
-    const track = slider.querySelector('.project-images-track');
-    const slides = track.querySelectorAll('.project-image, .project-video');
-    
-    let currentIndex = 0;
-    
-    function updateSlidePosition() {
-        slides.forEach((slide, index) => {
-            slide.style.display = index === currentIndex ? 'block' : 'none';
+if (window.innerWidth <= 768) {
+    document.querySelectorAll('.project-images-slider').forEach(slider => {
+        const leftArrow = slider.querySelector('.slider-arrow-left');
+        const rightArrow = slider.querySelector('.slider-arrow-right');
+        const track = slider.querySelector('.project-images-track');
+        const slides = track.querySelectorAll('.project-image, .project-video');
+        
+        let currentIndex = 0;
+        
+        function updateSlidePosition() {
+            slides.forEach((slide, index) => {
+                slide.style.display = index === currentIndex ? 'block' : 'none';
+            });
+            
+            // Update button visibility
+            if (leftArrow) {
+                leftArrow.style.display = currentIndex === 0 ? 'none' : 'flex';
+            }
+            if (rightArrow) {
+                rightArrow.style.display = currentIndex === slides.length - 1 ? 'none' : 'flex';
+            }
+        }
+        
+        if (leftArrow) {
+            leftArrow.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSlidePosition();
+                }
+            });
+        }
+        
+        if (rightArrow) {
+            rightArrow.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                    updateSlidePosition();
+                }
+            });
+        }
+        
+        // Initialize
+        updateSlidePosition();
+    });
+}
+
+// Desktop Swipe/Drag Functionality for Project Images
+if (window.innerWidth > 768) {
+    document.querySelectorAll('.project-images-slider').forEach(slider => {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.style.cursor = 'grabbing';
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
         });
         
-        // Update button visibility
-        if (leftArrow) {
-            leftArrow.style.display = currentIndex === 0 ? 'none' : 'flex';
-        }
-        if (rightArrow) {
-            rightArrow.style.display = currentIndex === slides.length - 1 ? 'none' : 'flex';
-        }
-    }
-    
-    if (leftArrow) {
-        leftArrow.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateSlidePosition();
-            }
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
         });
-    }
-    
-    if (rightArrow) {
-        rightArrow.addEventListener('click', () => {
-            if (currentIndex < slides.length - 1) {
-                currentIndex++;
-                updateSlidePosition();
-            }
+        
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
         });
-    }
-    
-    // Initialize
-    updateSlidePosition();
-});
+        
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    });
+}
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
