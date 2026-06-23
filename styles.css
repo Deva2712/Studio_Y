@@ -1114,6 +1114,17 @@ p {
     text-align: center;
 }
 
+/* Contact Form Section */
+.contact-form-section {
+    padding: 3rem 128px;
+    background-color: #fff;
+}
+
+#ff-compose {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 /* Footer */
 .footer {
     background-color: #DCD9D9;
@@ -1968,6 +1979,11 @@ p {
     
     .beyond-borders h2 {
         font-size: 48px;
+    }
+    
+    /* Contact form mobile */
+    .contact-form-section {
+        padding: 3rem 1rem;
     }
     
     /* Footer mobile */
