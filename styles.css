@@ -481,8 +481,9 @@ p {
 }
 
 .project-image {
-    min-width: 85%;
-    height: 600px;
+    width: 480px;
+    aspect-ratio: 4 / 5;
+    height: auto;
     background-color: rgb(238, 231, 223);
     border-radius: 19px 0 0 0;
     scroll-snap-align: center;
@@ -494,8 +495,9 @@ p {
 }
 
 .project-video {
-    min-width: 85%;
-    height: 600px;
+    width: 480px;
+    aspect-ratio: 4 / 5;
+    height: auto;
     border-radius: 19px 0 0 0;
     scroll-snap-align: center;
     flex-shrink: 0;
@@ -508,6 +510,54 @@ p {
     height: 100%;
     object-fit: cover;
 }
+
+/* Use mobile images for desktop project images */
+.nivara-img-1 { background-image: url('Nivara for Mobile/DSC04080-HDR.webp') !important; }
+.nivara-img-2 { background-image: url('Nivara for Mobile/DSC04086-HDR (1).webp') !important; }
+.nivara-img-3 { background-image: url('Nivara for Mobile/DSC04095-HDR.webp') !important; }
+.nivara-img-4 { background-image: url('Nivara for Mobile/DSC04125-HDR.webp') !important; }
+.nivara-img-5 { background-image: url('Nivara for Mobile/DSC04134-HDR (1).webp') !important; }
+.nivara-img-6 { background-image: url('Nivara for Mobile/DSC04164-HDR.webp') !important; }
+.nivara-img-7 { background-image: url('Nivara for Mobile/DSC04170-HDR.webp') !important; }
+.nivara-img-8 { background-image: url('Nivara for Mobile/DSC04173-HDR.webp') !important; }
+.nivara-img-9 { background-image: url('Nivara for Mobile/DSC04176.webp') !important; }
+.nivara-img-10 { background-image: url('Nivara for Mobile/DSC04186-HDR.webp') !important; }
+.nivara-img-11 { background-image: url('Nivara for Mobile/DSC04195-HDR.webp') !important; }
+.nivara-img-12 { background-image: url('Nivara for Mobile/DSC04199-HDR.webp') !important; }
+.nivara-img-13 { background-image: url('Nivara for Mobile/DSC04202-HDR.webp') !important; }
+.nivara-img-14 { background-image: url('Nivara for Mobile/DSC04207-HDR.webp') !important; }
+.nivara-img-15 { background-image: url('Nivara for Mobile/DSC04214-HDR (1).webp') !important; }
+.nivara-img-16 { background-image: url('Nivara for Mobile/DSC04220-HDR.webp') !important; }
+
+.team-pixel-first { background-image: url("TP's Headquater for Mobile/first.webp") !important; }
+.team-pixel-second { background-image: url("TP's Headquater for Mobile/second.webp") !important; }
+.team-pixel-third { background-image: url("TP's Headquater for Mobile/third.webp") !important; }
+.team-pixel-fourth { background-image: url("TP's Headquater for Mobile/fourth.webp") !important; }
+.team-pixel-fifth { background-image: url("TP's Headquater for Mobile/fifth.webp") !important; }
+.team-pixel-sixth { background-image: url("TP's Headquater for Mobile/sixth.webp") !important; }
+.team-pixel-seventh { background-image: url("TP's Headquater for Mobile/01.webp") !important; }
+.team-pixel-eighth { background-image: url("TP's Headquater for Mobile/09 (1).webp") !important; }
+
+.pavilion-img-1 { background-image: url('Pavilion For Mobile/DSC08680.webp') !important; }
+.pavilion-img-2 { background-image: url('Pavilion For Mobile/DSC08709.webp') !important; }
+.pavilion-img-3 { background-image: url('Pavilion For Mobile/DSC08718.webp') !important; }
+.pavilion-img-4 { background-image: url('Pavilion For Mobile/DSC08725.webp') !important; }
+.pavilion-img-5 { background-image: url('Pavilion For Mobile/DSC08727 (1).webp') !important; }
+.pavilion-img-6 { background-image: url('Pavilion For Mobile/DSC08738.webp') !important; }
+.pavilion-img-7 { background-image: url('Pavilion For Mobile/DSC08754.webp') !important; }
+.pavilion-img-8 { background-image: url('Pavilion For Mobile/DSC08761.webp') !important; }
+.pavilion-img-9 { background-image: url('Pavilion For Mobile/DSC08815.webp') !important; }
+.pavilion-img-10 { background-image: url('Pavilion For Mobile/DSC08817.webp') !important; }
+.pavilion-img-11 { background-image: url('Pavilion For Mobile/DSC08835.webp') !important; }
+
+.katni-img-1 { background-image: url('Office Space for mobile/02.webp') !important; }
+.katni-img-2 { background-image: url('Office Space for mobile/06.webp') !important; }
+.katni-img-3 { background-image: url('Office Space for mobile/08.webp') !important; }
+.katni-img-4 { background-image: url('Office Space for mobile/09 (1).webp') !important; }
+.katni-img-5 { background-image: url('Office Space for mobile/10.webp') !important; }
+.katni-img-6 { background-image: url('Office Space for mobile/12.webp') !important; }
+.katni-img-7 { background-image: url('Office Space for mobile/13.webp') !important; }
+.katni-img-8 { background-image: url('Office Space for mobile/7.webp') !important; }
 
 /* Video Mute Button */
 .video-mute-btn {
@@ -1066,6 +1116,8 @@ p {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .process-step h4 {
@@ -1112,12 +1164,15 @@ p {
 .contact-form-section {
     padding: 3rem 128px;
     background-color: #fff;
+    display: flex;
+    justify-content: center;
 }
 
 .contact-form-section iframe {
     max-width: 800px;
     margin: 0 auto;
     display: block;
+    overflow: hidden;
 }
 
 /* Footer */
