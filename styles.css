@@ -492,6 +492,7 @@ p {
     background-size: 110%;
     background-position: center bottom;
     background-repeat: no-repeat;
+    display: block;
 }
 
 .project-video {
@@ -502,6 +503,7 @@ p {
     flex-shrink: 0;
     overflow: hidden;
     position: relative;
+    display: block;
 }
 
 .project-video video {
