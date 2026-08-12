@@ -83,6 +83,26 @@ p {
     object-fit: contain;
 }
 
+/* Desktop: show the Yash Interiors logo above the Studio Y logo, without
+   shifting the Studio Y logo from its original position */
+@media (min-width: 768px) {
+    .logo-placeholder {
+        position: relative;
+    }
+
+    .logo-image-mobile-top {
+        display: block;
+        position: absolute;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 95px;
+        width: auto;
+        object-fit: contain;
+        z-index: 1;
+    }
+}
+
 /* Hero Section */
 .hero {
     position: relative;
@@ -906,6 +926,24 @@ p {
     padding-right: 2rem;
 }
 
+/* The founder-content copy is only used on desktop, positioned next to the image */
+.founder-content h2 {
+    display: none;
+}
+
+/* Desktop: show the heading beside the founder image instead of above it */
+@media (min-width: 768px) {
+    .founder-header h2 {
+        display: none;
+    }
+
+    .founder-content h2 {
+        display: block;
+        /* offset the font's internal leading so the caps line up with the image top */
+        margin-top: -1.25rem;
+    }
+}
+
 .founder-bio {
     font-family: 'Figtree', sans-serif;
     font-weight: 300;
@@ -1173,6 +1211,15 @@ p {
     line-height: 100%;
     letter-spacing: 0;
     color: #837F80;
+}
+
+/* Desktop: left-align the step description instead of letting it center-shrink */
+@media (min-width: 768px) {
+    .process-step p {
+        align-self: flex-start;
+        width: 100%;
+        text-align: left;
+    }
 }
 
 /* Contact Form Section */
