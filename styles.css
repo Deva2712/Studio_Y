@@ -2179,6 +2179,8 @@ p {
 /* ===== Enquire Now Popup ===== */
 .enquire-popup {
     width: min(92vw, 460px);
+    /* the global * { margin: 0 } reset kills the UA margin:auto that centres a dialog */
+    margin: auto;
     padding: 0;
     border: none;
     border-radius: 14px;
