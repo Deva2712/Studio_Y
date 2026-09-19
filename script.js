@@ -181,3 +181,90 @@ if (window.innerWidth < 768) {
 }
 
 console.log('Studio Y - Simple Navigation Loaded ✨');
+
+// Stamp each enquiry with the campaign that sent the visitor.
+// SOURCE_ENTRY_ID = the "Source" short-answer field in the Google Form.
+// Get it from the form's ⋮ menu > "Get pre-filled link" > fill anything > Copy link,
+// then read the entry.XXXXXXXXX out of the copied URL.
+const SOURCE_ENTRY_ID = 'entry.XXXXXXXXX';
+
+const utmParams = new URLSearchParams(window.location.search);
+const utmSource = ['utm_source', 'utm_medium', 'utm_campaign']
+    .map(key => utmParams.get(key))
+    .filter(Boolean)
+    .join(' / ');
+
+const contactForm = document.querySelector('.contact-form-section iframe');
+if (contactForm && utmSource) {
+    const separator = contactForm.src.includes('?') ? '&' : '?';
+    contactForm.src += separator + SOURCE_ENTRY_ID + '=' + encodeURIComponent(utmSource);
+}
+
+// ===== Enquire Now popup =====
+const ENQUIRE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdhc8doducXndRq6B5xxfHtA39i5Q-1T1pWz4JVCanug5_Whw/formResponse';
+const ENQUIRE_SEEN_KEY = 'studioy_enquire_seen';
+const ENQUIRE_DELAY_MS = 7000;
+
+const enquirePopup = document.getElementById('enquire-popup');
+
+// localStorage throws in some private-browsing modes - never let it break the popup
+function enquireSeen() {
+    try { return localStorage.getItem(ENQUIRE_SEEN_KEY) === '1'; } catch (e) { return false; }
+}
+function markEnquireSeen() {
+    try { localStorage.setItem(ENQUIRE_SEEN_KEY, '1'); } catch (e) { /* ignore */ }
+}
+
+if (enquirePopup) {
+    const enquireForm = enquirePopup.querySelector('.enquire-form');
+    const enquireThanks = enquirePopup.querySelector('.enquire-thanks');
+    const enquireSubmit = enquirePopup.querySelector('.enquire-submit');
+    let enquireSent = false;
+
+    if (!enquireSeen()) {
+        setTimeout(() => enquirePopup.showModal(), ENQUIRE_DELAY_MS);
+    }
+
+    enquirePopup.querySelector('.enquire-close')
+        .addEventListener('click', () => enquirePopup.close());
+
+    // Clicking the dark backdrop (never the card) closes it
+    enquirePopup.addEventListener('click', (e) => {
+        if (e.target === enquirePopup) enquirePopup.close();
+    });
+
+    // Fires for the X, the backdrop and Esc alike
+    enquirePopup.addEventListener('close', () => {
+        markEnquireSeen();
+        if (!enquireSent && typeof gtag === 'function') {
+            gtag('event', 'enquiry_popup_dismissed');
+        }
+    });
+
+    enquireForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        enquireSubmit.disabled = true;
+        enquireSubmit.textContent = 'Sending...';
+
+        try {
+            // no-cors: the POST lands in the sheet but the response is opaque by design
+            await fetch(ENQUIRE_FORM_ACTION, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: new FormData(enquireForm)
+            });
+        } catch (err) {
+            console.log('Enquiry submit failed', err);
+        }
+
+        enquireSent = true;
+        markEnquireSeen();
+        if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', { form: 'enquire_popup' });
+        }
+
+        enquireForm.hidden = true;
+        enquireThanks.hidden = false;
+        setTimeout(() => enquirePopup.close(), 2500);
+    });
+}

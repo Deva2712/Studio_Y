@@ -9,6 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VW8VZTNNLJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VW8VZTNNLJ');
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -455,6 +463,42 @@
             </div>
         </div>
     </footer>
+
+    <!-- Enquire Now Popup -->
+    <dialog id="enquire-popup" class="enquire-popup" aria-labelledby="enquire-popup-title">
+        <div class="enquire-inner">
+            <button type="button" class="enquire-close" aria-label="Close">
+                <i data-lucide="x"></i>
+            </button>
+
+            <form class="enquire-form">
+                <h2 id="enquire-popup-title">ENQUIRE NOW</h2>
+
+                <div class="enquire-field">
+                    <i data-lucide="user"></i>
+                    <input type="text" name="entry.2100124975" placeholder="Full Name"
+                           autocomplete="name" required>
+                </div>
+
+                <div class="enquire-field">
+                    <i data-lucide="mail"></i>
+                    <input type="email" name="entry.536117234" placeholder="Email Address"
+                           autocomplete="email" required>
+                </div>
+
+                <div class="enquire-field">
+                    <i data-lucide="phone"></i>
+                    <input type="tel" name="entry.296927675" placeholder="Mobile Number"
+                           autocomplete="tel" inputmode="numeric" pattern="[0-9+ -]{10,15}"
+                           title="Enter a valid mobile number" required>
+                </div>
+
+                <button type="submit" class="enquire-submit">Submit</button>
+            </form>
+
+            <p class="enquire-thanks" hidden>Thank you.<br>We'll be in touch shortly.</p>
+        </div>
+    </dialog>
 
     <script src="script.js"></script>
 </body>
