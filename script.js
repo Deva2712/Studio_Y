@@ -221,9 +221,23 @@ if (enquirePopup) {
     const enquireSubmit = enquirePopup.querySelector('.enquire-submit');
     let enquireSent = false;
 
-    if (!enquireSeen()) {
-        setTimeout(() => enquirePopup.showModal(), ENQUIRE_DELAY_MS);
+    // Reopening must show a fresh form, not the thank-you note from last time
+    function openEnquire() {
+        enquireForm.reset();
+        enquireForm.hidden = false;
+        enquireThanks.hidden = true;
+        enquireSubmit.disabled = false;
+        enquireSubmit.textContent = 'Submit';
+        enquireSent = false;
+        enquirePopup.showModal();
     }
+
+    // The 7s auto-open happens once; the floating button always works
+    if (!enquireSeen()) {
+        setTimeout(openEnquire, ENQUIRE_DELAY_MS);
+    }
+
+    document.querySelector('.enquire-fab')?.addEventListener('click', openEnquire);
 
     enquirePopup.querySelector('.enquire-close')
         .addEventListener('click', () => enquirePopup.close());
