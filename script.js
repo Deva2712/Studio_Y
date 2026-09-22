@@ -200,12 +200,51 @@ if (contactForm && utmSource) {
     contactForm.src += separator + SOURCE_ENTRY_ID + '=' + encodeURIComponent(utmSource);
 }
 
-// ===== Enquire Now popup =====
+// ===== Campaign tracking =====
+// Captured the moment someone lands and kept for 30 days, so a visitor who
+// arrives from an ad today and enquires next week is still credited to it.
+const TRACKED_PARAMS = [
+    'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
+    'gclid', 'fbclid'
+];
+const TRACKING_TTL_DAYS = 30;
+
+function setTrackingCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 86400000).toUTCString();
+    document.cookie = name + '=' + encodeURIComponent(value) +
+        ';expires=' + expires + ';path=/;SameSite=Lax';
+}
+
+function getTrackingCookie(name) {
+    const match = document.cookie.match('(^|; )' + name + '=([^;]*)');
+    return match ? decodeURIComponent(match[2]) : '';
+}
+
+// Last touch wins: the most recent campaign that brought them back gets credit
+const landingParams = new URLSearchParams(window.location.search);
+TRACKED_PARAMS.forEach((key) => {
+    if (landingParams.has(key)) {
+        setTrackingCookie(key, landingParams.get(key), TRACKING_TTL_DAYS);
+    }
+});
+
+function campaignSource() {
+    const parts = ['utm_source', 'utm_medium', 'utm_campaign']
+        .map(getTrackingCookie)
+        .filter(Boolean);
+    return parts.length ? parts.join(' / ') : 'direct';
+}
+
+// ===== Enquiry forms (popup + the one inside About Us) =====
 const ENQUIRE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdhc8doducXndRq6B5xxfHtA39i5Q-1T1pWz4JVCanug5_Whw/formResponse';
+
+// Add "Source" and "GCLID" questions to the Google Form, then paste their
+// entry.NNNNN ids here. Left blank, the fields simply are not sent.
+const ENQUIRE_SOURCE_ENTRY = '';
+const ENQUIRE_GCLID_ENTRY = '';
+
 const ENQUIRE_SEEN_KEY = 'studioy_enquire_seen';
 const ENQUIRE_DELAY_MS = 7000;
-
-const enquirePopup = document.getElementById('enquire-popup');
 
 // localStorage throws in some private-browsing modes - never let it break the popup
 function enquireSeen() {
@@ -215,29 +254,73 @@ function markEnquireSeen() {
     try { localStorage.setItem(ENQUIRE_SEEN_KEY, '1'); } catch (e) { /* ignore */ }
 }
 
+function enquirePanel(form) {
+    return form.closest('.enquire-inner, .about-enquire');
+}
+
+function resetEnquiry(form) {
+    const button = form.querySelector('.enquire-submit');
+    form.reset();
+    form.hidden = false;
+    enquirePanel(form).querySelector('.enquire-thanks').hidden = true;
+    button.disabled = false;
+    button.textContent = form.dataset.submitLabel;
+}
+
+document.querySelectorAll('.enquire-form').forEach((form) => {
+    const button = form.querySelector('.enquire-submit');
+    form.dataset.submitLabel = button.textContent;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        button.disabled = true;
+        button.textContent = 'Sending...';
+
+        const data = new FormData(form);
+        if (ENQUIRE_SOURCE_ENTRY) data.append(ENQUIRE_SOURCE_ENTRY, campaignSource());
+        if (ENQUIRE_GCLID_ENTRY) data.append(ENQUIRE_GCLID_ENTRY, getTrackingCookie('gclid'));
+
+        try {
+            // no-cors: the POST lands in the sheet but the response is opaque by design
+            await fetch(ENQUIRE_FORM_ACTION, { method: 'POST', mode: 'no-cors', body: data });
+        } catch (err) {
+            console.log('Enquiry submit failed', err);
+        }
+
+        if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', { form: form.dataset.formName || 'enquire' });
+        }
+
+        form.hidden = true;
+        enquirePanel(form).querySelector('.enquire-thanks').hidden = false;
+        form.dispatchEvent(new CustomEvent('enquiry:sent'));
+    });
+});
+
+// ===== Popup behaviour =====
+const enquirePopup = document.getElementById('enquire-popup');
+
 if (enquirePopup) {
-    const enquireForm = enquirePopup.querySelector('.enquire-form');
-    const enquireThanks = enquirePopup.querySelector('.enquire-thanks');
-    const enquireSubmit = enquirePopup.querySelector('.enquire-submit');
-    let enquireSent = false;
+    const popupForm = enquirePopup.querySelector('.enquire-form');
+    const popupTitle = enquirePopup.querySelector('#enquire-popup-title');
+    let popupSent = false;
 
     // Reopening must show a fresh form, not the thank-you note from last time
-    function openEnquire() {
-        enquireForm.reset();
-        enquireForm.hidden = false;
-        enquireThanks.hidden = true;
-        enquireSubmit.disabled = false;
-        enquireSubmit.textContent = 'Submit';
-        enquireSent = false;
+    function openEnquire(title) {
+        resetEnquiry(popupForm);
+        popupTitle.textContent = title || 'ENQUIRE NOW';
+        popupSent = false;
         enquirePopup.showModal();
     }
 
-    // The 7s auto-open happens once; the floating button always works
+    // The 7s auto-open happens once; the floating buttons always work
     if (!enquireSeen()) {
-        setTimeout(openEnquire, ENQUIRE_DELAY_MS);
+        setTimeout(() => openEnquire(), ENQUIRE_DELAY_MS);
     }
 
-    document.querySelector('.enquire-fab')?.addEventListener('click', openEnquire);
+    document.querySelectorAll('.enquire-fab, .callback-fab').forEach((fab) => {
+        fab.addEventListener('click', () => openEnquire(fab.dataset.popupTitle));
+    });
 
     enquirePopup.querySelector('.enquire-close')
         .addEventListener('click', () => enquirePopup.close());
@@ -250,35 +333,14 @@ if (enquirePopup) {
     // Fires for the X, the backdrop and Esc alike
     enquirePopup.addEventListener('close', () => {
         markEnquireSeen();
-        if (!enquireSent && typeof gtag === 'function') {
+        if (!popupSent && typeof gtag === 'function') {
             gtag('event', 'enquiry_popup_dismissed');
         }
     });
 
-    enquireForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        enquireSubmit.disabled = true;
-        enquireSubmit.textContent = 'Sending...';
-
-        try {
-            // no-cors: the POST lands in the sheet but the response is opaque by design
-            await fetch(ENQUIRE_FORM_ACTION, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: new FormData(enquireForm)
-            });
-        } catch (err) {
-            console.log('Enquiry submit failed', err);
-        }
-
-        enquireSent = true;
+    popupForm.addEventListener('enquiry:sent', () => {
+        popupSent = true;
         markEnquireSeen();
-        if (typeof gtag === 'function') {
-            gtag('event', 'generate_lead', { form: 'enquire_popup' });
-        }
-
-        enquireForm.hidden = true;
-        enquireThanks.hidden = false;
         setTimeout(() => enquirePopup.close(), 2500);
     });
 }

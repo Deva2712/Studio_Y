@@ -41,8 +41,40 @@
     <!-- About Us Section with Extended Background -->
     <section id="about-us" class="about-us">
         <div class="about-overlay">
-            <h2>ABOUT US</h2>
-            <p>At Studio Y, we believe spaces should do more than look beautiful they should feel right. <br>Every home, office, or corner we design begins with listening: to your story, your lifestyle, your rhythms.</p>
+            <div class="about-text">
+                <h2>ABOUT US</h2>
+                <p>At Studio Y, we believe spaces should do more than look beautiful they should feel right. <br>Every home, office, or corner we design begins with listening: to your story, your lifestyle, your rhythms.</p>
+            </div>
+
+            <div class="about-enquire">
+                <form class="enquire-form" data-form-name="about_inline">
+                    <h3>BOOK A FREE CONSULTATION</h3>
+                    <p class="about-enquire-sub">Tell us about your space and we'll be in touch.</p>
+
+                    <div class="enquire-field">
+                        <i data-lucide="user"></i>
+                        <input type="text" name="entry.2100124975" placeholder="Full Name"
+                               autocomplete="name" required>
+                    </div>
+
+                    <div class="enquire-field">
+                        <i data-lucide="mail"></i>
+                        <input type="email" name="entry.536117234" placeholder="Email Address"
+                               autocomplete="email" required>
+                    </div>
+
+                    <div class="enquire-field">
+                        <i data-lucide="phone"></i>
+                        <input type="tel" name="entry.296927675" placeholder="Mobile Number"
+                               autocomplete="tel" inputmode="numeric" pattern="[0-9+ -]{10,15}"
+                               title="Enter a valid mobile number" required>
+                    </div>
+
+                    <button type="submit" class="enquire-submit">Book My Consultation</button>
+                </form>
+
+                <p class="enquire-thanks" hidden>Thank you.<br>We'll be in touch shortly.</p>
+            </div>
         </div>
     </section>
 
@@ -464,6 +496,12 @@
         </div>
     </footer>
 
+    <!-- Floating call-back button -->
+    <button type="button" class="callback-fab" aria-haspopup="dialog" data-popup-title="GET A CALL BACK">
+        <i data-lucide="phone-call"></i>
+        <span>Get a Call Back</span>
+    </button>
+
     <!-- Floating Enquire Now button -->
     <button type="button" class="enquire-fab" aria-haspopup="dialog">
         <i data-lucide="message-square"></i>
@@ -477,7 +515,7 @@
                 <i data-lucide="x"></i>
             </button>
 
-            <form class="enquire-form">
+            <form class="enquire-form" data-form-name="popup">
                 <h2 id="enquire-popup-title">ENQUIRE NOW</h2>
 
                 <div class="enquire-field">
