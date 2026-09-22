@@ -205,6 +205,7 @@ if (contactForm && utmSource) {
 // arrives from an ad today and enquires next week is still credited to it.
 const TRACKED_PARAMS = [
     'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
+    'utm_device', 'utm_keyword', 'utm_placement', 'utm_channel',
     'gclid', 'fbclid'
 ];
 const TRACKING_TTL_DAYS = 30;
@@ -228,6 +229,10 @@ TRACKED_PARAMS.forEach((key) => {
     }
 });
 
+if (!getTrackingCookie('landing_page')) {
+    setTrackingCookie('landing_page', window.location.pathname + window.location.search, TRACKING_TTL_DAYS);
+}
+
 function campaignSource() {
     const parts = ['utm_source', 'utm_medium', 'utm_campaign']
         .map(getTrackingCookie)
@@ -238,10 +243,23 @@ function campaignSource() {
 // ===== Enquiry forms (popup + the one inside About Us) =====
 const ENQUIRE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdhc8doducXndRq6B5xxfHtA39i5Q-1T1pWz4JVCanug5_Whw/formResponse';
 
-// Add "Source" and "GCLID" questions to the Google Form, then paste their
-// entry.NNNNN ids here. Left blank, the fields simply are not sent.
-const ENQUIRE_SOURCE_ENTRY = '';
-const ENQUIRE_GCLID_ENTRY = '';
+// Each tracked parameter needs its own question on the Google Form to get its
+// own column in the sheet. Add the question, then map it here. Anything left
+// commented out is simply not sent, so partial setup is safe.
+const ENQUIRE_TRACKING_ENTRIES = {
+    // 'source':        'entry.NNNNNNNNN',  // combined "instagram / cpc / diwali"
+    // 'utm_source':    'entry.NNNNNNNNN',
+    // 'utm_medium':    'entry.NNNNNNNNN',
+    // 'utm_campaign':  'entry.NNNNNNNNN',
+    // 'utm_term':      'entry.NNNNNNNNN',
+    // 'utm_content':   'entry.NNNNNNNNN',
+    // 'utm_device':    'entry.NNNNNNNNN',
+    // 'utm_keyword':   'entry.NNNNNNNNN',
+    // 'utm_placement': 'entry.NNNNNNNNN',
+    // 'utm_channel':   'entry.NNNNNNNNN',
+    // 'gclid':         'entry.NNNNNNNNN',
+    // 'landing_page':  'entry.NNNNNNNNN'
+};
 
 const ENQUIRE_SEEN_KEY = 'studioy_enquire_seen';
 const ENQUIRE_DELAY_MS = 7000;
@@ -277,8 +295,12 @@ document.querySelectorAll('.enquire-form').forEach((form) => {
         button.textContent = 'Sending...';
 
         const data = new FormData(form);
-        if (ENQUIRE_SOURCE_ENTRY) data.append(ENQUIRE_SOURCE_ENTRY, campaignSource());
-        if (ENQUIRE_GCLID_ENTRY) data.append(ENQUIRE_GCLID_ENTRY, getTrackingCookie('gclid'));
+        Object.entries(ENQUIRE_TRACKING_ENTRIES).forEach(([field, entry]) => {
+            if (!entry || entry.includes('NNN')) return;
+            if (field === 'source') data.append(entry, campaignSource());
+            else if (field === 'landing_page') data.append(entry, getTrackingCookie('landing_page'));
+            else data.append(entry, getTrackingCookie(field));
+        });
 
         try {
             // no-cors: the POST lands in the sheet but the response is opaque by design
@@ -287,6 +309,13 @@ document.querySelectorAll('.enquire-form').forEach((form) => {
             console.log('Enquiry submit failed', err);
         }
 
+        // GTM triggers listen on the dataLayer; gtag stays for the direct GA4 tag
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: 'enquiry_submitted',
+            form_name: form.dataset.formName || 'enquire',
+            campaign_source: campaignSource()
+        });
         if (typeof gtag === 'function') {
             gtag('event', 'generate_lead', { form: form.dataset.formName || 'enquire' });
         }
